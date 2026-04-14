@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy 2nd Anniversary 🌻</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink:    #f5a800;
+      --peach:   #e07b00;
+      --cream:   #fffbf0;
+      --soft:    #fff0b3;
+      --red:     #c47600;
+      --text:    #3b2a00;
+      --light:   #fffde8;
+      --green:   #5a7a2b;
+      --brown:   #7a4e00;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── floating hearts background ── */
+    .hearts-bg {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+    .heart-float {
+      position: absolute;
+      font-size: 1.4rem;
+      animation: floatUp linear infinite;
+      opacity: 0.18;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.18; }
+      90%  { opacity: 0.18; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── hero ── */
+    .hero {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(160deg, #fff4b3 0%, #fffbf0 55%, #ffe080 100%);
+    }
+    .hero-badge {
+      background: var(--pink);
+      color: #fff;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      padding: .4rem 1.2rem;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+      display: inline-block;
+      animation: popIn .6s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .hero h1 {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(3rem, 10vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--red);
+      animation: popIn .7s .1s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .hero-sub {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      color: var(--pink);
+      margin-top: .6rem;
+      animation: popIn .7s .2s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .hero-date {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: #8a6000;
+      font-weight: 600;
+      letter-spacing: .08em;
+      animation: popIn .7s .35s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .scroll-hint {
+      margin-top: 3rem;
+      font-size: 1.8rem;
+      animation: bounce 1.4s ease-in-out infinite, popIn .7s .5s both;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.7) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* ── section wrapper ── */
+    section {
+      position: relative; z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .section-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2rem, 6vw, 3rem);
+      color: var(--red);
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .section-title span { font-size: 1.4em; }
+
+    /* ── divider ── */
+    .divider {
+      text-align: center;
+      font-size: 1.6rem;
+      letter-spacing: .5rem;
+      color: var(--pink);
+      opacity: .5;
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* ── timeline ── */
+    .timeline { position: relative; padding: 1rem 0; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--pink), #5a7a2b);
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+    .tl-item {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: calc(50% + 2rem);
+      margin-bottom: 2.5rem;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .tl-item.right {
+      justify-content: flex-start;
+      padding-right: 0;
+      padding-left: calc(50% + 2rem);
+      transform: translateX(30px);
+    }
+    .tl-item.visible {
+      opacity: 1; transform: translateX(0);
+    }
+    .tl-dot {
+      position: absolute;
+      left: 50%; top: 1.2rem;
+      width: 18px; height: 18px;
+      background: var(--pink);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 3px var(--soft);
+    }
+    .tl-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.1rem 1.4rem;
+      box-shadow: 0 4px 20px rgba(196,118,0,.13);
+      max-width: 300px;
+      border: 2px solid var(--soft);
+    }
+    .tl-card .emoji { font-size: 1.8rem; }
+    .tl-card h3 {
+      font-family: 'Caveat', cursive;
+      font-size: 1.35rem;
+      color: var(--red);
+      margin: .3rem 0 .2rem;
+    }
+    .tl-card p {
+      font-size: .9rem;
+      color: #7a5a00;
+      line-height: 1.5;
+    }
+    .tl-card .date-tag {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--pink);
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .15rem .7rem;
+      border-radius: 999px;
+      margin-bottom: .5rem;
+      letter-spacing: .04em;
+    }
+
+    /* ── photos ── */
+    .photos-bg {
+      background: linear-gradient(135deg, #fff4b3 0%, #fffbf0 100%);
+      border-radius: 32px;
+      padding: 2.5rem 1.5rem;
+    }
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+    .photo-frame {
+      background: #fff;
+      border-radius: 18px;
+      padding: .8rem .8rem .4rem;
+      box-shadow: 0 6px 24px rgba(196,118,0,.15);
+      transform: rotate(-1.5deg);
+      transition: transform .3s ease, box-shadow .3s ease;
+      border: 2px solid var(--soft);
+    }
+    .photo-frame:nth-child(even) { transform: rotate(1.8deg); }
+    .photo-frame:hover {
+      transform: rotate(0) scale(1.04);
+      box-shadow: 0 12px 40px rgba(196,118,0,.25);
+      z-index: 2;
+    }
+    .photo-frame img {
+      width: 100%; height: 240px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+    .photo-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 1.05rem;
+      color: var(--pink);
+      text-align: center;
+      padding: .5rem 0 .2rem;
+    }
+
+    /* ── poem ── */
+    .poem-wrap {
+      background: #fff;
+      border-radius: 28px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 6px 30px rgba(196,118,0,.12);
+      border: 2px solid var(--soft);
+      position: relative;
+      overflow: hidden;
+    }
+    .poem-wrap::before {
+      content: '❝';
+      font-size: 8rem;
+      position: absolute;
+      top: -1.5rem; left: .5rem;
+      color: var(--soft);
+      font-family: serif;
+      line-height: 1;
+    }
+    .poem-text {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+      line-height: 2;
+      color: var(--text);
+      text-align: center;
+      white-space: pre-line;
+      position: relative; z-index: 1;
+    }
+    .poem-author {
+      text-align: right;
+      margin-top: 1.5rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: var(--pink);
+    }
+
+    /* ── gift reveal ── */
+    .gift-box {
+      text-align: center;
+    }
+    .gift-cover {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .gift-img {
+      width: 100%; max-width: 420px;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 22px;
+      display: block;
+      filter: blur(18px) brightness(.6);
+      transition: filter 1s ease;
+      border: 3px solid var(--soft);
+      box-shadow: 0 8px 30px rgba(196,118,0,.2);
+    }
+    .gift-img.revealed { filter: blur(0) brightness(1); }
+    .gift-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity .6s ease;
+    }
+    .gift-overlay.hidden { opacity: 0; pointer-events: none; }
+    .gift-btn {
+      background: var(--pink);
+      color: #fff;
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      padding: .8rem 2rem;
+      border: none; border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(196,118,0,.4);
+      transition: transform .2s, box-shadow .2s;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .gift-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 6px 24px rgba(196,118,0,.5);
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 4px 16px rgba(196,118,0,.4); }
+      50%      { box-shadow: 0 4px 28px rgba(196,118,0,.75); }
+    }
+    .gift-hint {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      color: rgba(255,255,255,.85);
+      margin-top: .5rem;
+    }
+    .gift-msg {
+      margin-top: 1.2rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: var(--red);
+      opacity: 0;
+      transition: opacity .8s .5s ease;
+    }
+    .gift-msg.visible { opacity: 1; }
+
+    /* ── footer ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      color: var(--pink);
+    }
+    footer .big { font-size: 2.5rem; display: block; margin-bottom: .3rem; }
+
+    /* ── responsive ── */
+    @media (max-width: 600px) {
+      .timeline::before { left: 20px; }
+      .tl-item, .tl-item.right {
+        justify-content: flex-start;
+        padding-left: 3.5rem;
+        padding-right: 0;
+        transform: translateX(-20px);
+      }
+      .tl-dot { left: 20px; }
+      .tl-card { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- floating sunflowers -->
+<div class="hearts-bg" id="heartsContainer"></div>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <span class="hero-badge">🌻 2 Years of Us 🌻</span>
+  <h1>Happy Anniversary,<br>My Love 🌻</h1>
+  <p class="hero-sub">Two years, a million memories, forever to go.</p>
+  <p class="hero-date">📅  April 14th →  Today</p>
+  <div class="scroll-hint">↓</div>
+</div>
+
+<!-- ═══ TIMELINE ═══ -->
+<section>
+  <h2 class="section-title"><span>🗓️</span> Our Story So Far</h2>
+  <div class="timeline" id="timeline">
+
+    <div class="tl-item" data-side="left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="date-tag">Month 1</span>
+        <div class="emoji">🌟</div>
+        <h3>The Beginning</h3>
+        <p>That beautiful sunday, where we dressed up, laughed and held hands for the first time.</p>
+      </div>
+    </div>
+
+    <div class="tl-item right" data-side="right">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="date-tag">Month 3</span>
+        <div class="emoji">🌹</div>
+        <h3>The start of Long Distance</h3>
+        <p>First days of long distance, and I already knew that it was going to be worth it.</p>
+      </div>
+    </div>
+
+    <div class="tl-item" data-side="left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="date-tag">Month 6</span>
+        <div class="emoji">✈️</div>
+        <h3>Visiting</h3>
+        <p>I got to see you in Bolivia, and see that smile that a screen cannot do justice.</p>
+      </div>
+    </div>
+
+    <div class="tl-item right" data-side="right">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="date-tag">Year 1</span>
+        <div class="emoji">🎂</div>
+        <h3>First Year!</h3>
+        <p>We went back to the place it all started, and I just knew my love for you would only grow.</p>
+      </div>
+    </div>
+
+    <div class="tl-item" data-side="left">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="date-tag">Year 2</span>
+        <div class="emoji">💍</div>
+        <h3>Even Stronger</h3>
+        <p>Two years in and I love you more than I did on day one.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<span class="divider">🌻 🌻 🌻</span>
+
+<!-- ═══ PHOTOS ═══ -->
+<section>
+  <h2 class="section-title"><span>📸</span> Us, in Pictures</h2>
+  <div class="photos-bg">
+    <div class="photos-grid">
+
+      <div class="photo-frame">
+        <!-- 👉 Name your first photo: couple1.jpg -->
+        <img src="couple1.jpg" alt="Us" onerror="this.style.background='#fff4b3';this.style.minHeight='240px';this.alt='📷 Add couple1.jpg'"/>
+        <p class="photo-caption">🌻 Us being us</p>
+      </div>
+
+      <div class="photo-frame">
+        <!-- 👉 Name your second photo: couple2.jpg -->
+        <img src="couple2.jpg" alt="Us" onerror="this.style.background='#ffe880';this.style.minHeight='240px';this.alt='📷 Add couple2.jpg'"/>
+        <p class="photo-caption">☀️ My favourite person</p>
+      </div>
+
+      <div class="photo-frame">
+        <!-- 👉 Optional third photo: couple3.jpg -->
+        <img src="couple3.jpg" alt="Us" onerror="this.style.background='#fff0a0';this.style.minHeight='240px';this.alt='📷 Add couple3.jpg'"/>
+        <p class="photo-caption">🌿 So happy with you</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<span class="divider">🌻 🌻 🌻</span>
+
+<!-- ═══ POEM ═══ -->
+<section>
+  <h2 class="section-title"><span>📝</span> A Letter</h2>
+  <div class="poem-wrap">
+    <p class="poem-text">
+      How can words do justice to what you make me feel?
+      How can I capture your essence in ink?
+      In the impossibility of that act, you exist—
+      occupying a space entirely your own in my heart,
+      where not even art can fully express.
+      There, in that space, every smile, every laugh, every tear, every glance,
+      and every moment with you is stored.
+      Like a gallery one cannot see, only feel—
+      one I can’t even put into words.
+      I love you. I will always love you,
+      from now to infinity.
+    </p>
+    <p class="poem-author">— With all my love 🌻</p>
+  </div>
+</section>
+
+<span class="divider">🌻 🌻 🌻</span>
+
+<!-- ═══ GIFT REVEAL ═══ -->
+<section>
+  <h2 class="section-title"><span>🎁</span> A little Suprise</h2>
+  <div class="gift-box">
+    <div class="gift-cover" id="giftCover">
+      <!-- 👉 Name your gift photo: gift.jpg -->
+      <img src="gift.jpg" alt="Your gift" id="giftImg" class="gift-img"
+        onerror="this.style.background='linear-gradient(135deg,#ffe0ee,#ffd6e8)';this.style.minHeight='340px';this.style.maxWidth='420px'"/>
+      <div class="gift-overlay" id="giftOverlay">
+        <button class="gift-btn" onclick="revealGift()">🎁 Tap to reveal!</button>
+        <p class="gift-hint">( go on, open it 😉 )</p>
+      </div>
+    </div>
+    <p class="gift-msg" id="giftMsg">🌻 Hope you love it as much as I love you! 🌻</p>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <span class="big">🌻</span>
+  Happy 2nd Anniversary, my love.<br>
+  Here's to forever with you.
+</footer>
+
+<script>
+  // ── floating hearts ──
+  const hc = document.getElementById('heartsContainer');
+  const emojis = ['💕','❤️','🌸','✨','💖','🌹','💗','🎀'];
+  for (let i = 0; i < 22; i++) {
+    const h = document.createElement('span');
+    h.className = 'heart-float';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.animationDuration = (8 + Math.random() * 12) + 's';
+    h.style.animationDelay = (Math.random() * 10) + 's';
+    h.style.fontSize = (.8 + Math.random() * 1.4) + 'rem';
+    hc.appendChild(h);
+  }
+
+  // ── timeline scroll reveal ──
+  const tlItems = document.querySelectorAll('.tl-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.2 });
+  tlItems.forEach(i => observer.observe(i));
+
+  // ── gift reveal ──
+  function revealGift() {
+    document.getElementById('giftImg').classList.add('revealed');
+    document.getElementById('giftOverlay').classList.add('hidden');
+    document.getElementById('giftMsg').classList.add('visible');
+    // little confetti burst
+    for (let i = 0; i < 18; i++) {
+      const c = document.createElement('span');
+      c.style.cssText = `position:fixed;font-size:1.6rem;pointer-events:none;z-index:999;
+        left:${30+Math.random()*40}vw;top:${20+Math.random()*60}vh;
+        animation:floatUp ${1+Math.random()*2}s ease forwards;`;
+      c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }
+  }
+</script>
+</body>
+</html>
